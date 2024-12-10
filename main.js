@@ -18,9 +18,29 @@ function addBookToLibrary(library, book) {
 }
 
 function createBookElement(book) {
+  // create li element
   let bookView = document.createElement("li");
   bookView.classList.add("book");
   bookView.textContent = book.info();
+
+  // add button to li
+  let removeBtn = document.createElement("button");
+  removeBtn.classList.add("removeBtn");
+  removeBtn.textContent = "Remove This Book";
+  bookView.appendChild(removeBtn);
+  // add event listener for remove button
+  removeBtn.addEventListener("click", (e) => {
+    // alert(`Removed ${e.currentTarget.parentElement.textContent}`);
+    if (!myLibrary.includes(book)) {
+      return;
+    }
+    removedBook = myLibrary.splice(myLibrary.indexOf(book), 1);
+    // e.currentTarget.parentElement.type;
+    console.log(JSON.stringify(book));
+    console.log(JSON.stringify(removedBook));
+    console.log(JSON.stringify(myLibrary));
+  });
+
   return bookView;
 }
 
