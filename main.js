@@ -30,15 +30,13 @@ function createBookElement(book) {
   bookView.appendChild(removeBtn);
   // add event listener for remove button
   removeBtn.addEventListener("click", (e) => {
-    // alert(`Removed ${e.currentTarget.parentElement.textContent}`);
     if (!myLibrary.includes(book)) {
       return;
     }
+    // remove book from library array
     removedBook = myLibrary.splice(myLibrary.indexOf(book), 1);
-    // e.currentTarget.parentElement.type;
-    console.log(JSON.stringify(book));
-    console.log(JSON.stringify(removedBook));
-    console.log(JSON.stringify(myLibrary));
+    // remove bookView from DOM
+    bookView.remove();
   });
 
   return bookView;
