@@ -76,7 +76,7 @@ body {
 }
 
 .flex-container button {
-  background-color: greenyellow;
+  background-color: palegreen;
   border-radius: 16px;
 }
 
@@ -105,4 +105,17 @@ body {
 .book .removeBtn {
   background-color: lightcoral;
   margin-top: auto;
+}
+
+dialog {
+  /* display: flex;
+  flex-direction: column; */
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px grey;
+
+  background-color: palegreen;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(1px) brightness(0.9);
 }

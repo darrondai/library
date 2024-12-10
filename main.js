@@ -69,3 +69,15 @@ for (let book of myLibrary) {
   let bookView = createBookElement(book);
   library_list.appendChild(bookView);
 }
+
+const new_book_btn = document.querySelector("#new-book-btn");
+const add_book_dialog = document.querySelector("dialog");
+const close_dialog_btn = document.querySelector("#close-dialog-btn");
+
+new_book_btn.addEventListener("click", () => {
+  add_book_dialog.showModal();
+});
+
+close_dialog_btn.addEventListener("click", () => {
+  add_book_dialog.close();
+});
