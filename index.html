@@ -13,8 +13,20 @@
     </div>
     <dialog>
       <button id="close-dialog-btn" autofocus>Close</button>
-      <p>This is a modal!</p>
       <!-- add form -->
+      <form action="" method="dialog">
+        <label for="title-input">Title:</label>
+        <input type="text" name="title" id="title-input" required />
+        <label for="author-input">Author:</label>
+        <input type="text" name="author" id="author-input" required />
+        <label for="page-input">Pages:</label>
+        <input type="number" name="page-count" id="page-input" required />
+        <fieldset>
+          <label for="read-input">Read:</label>
+          <input type="checkbox" name="read-status" id="read-input" />
+        </fieldset>
+        <input type="submit" />
+      </form>
     </dialog>
     <script src="main.js"></script>
   </body>

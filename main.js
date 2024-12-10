@@ -4,7 +4,7 @@ function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
+  this.read = read || false;
 }
 
 Book.prototype.info = function () {
@@ -80,4 +80,22 @@ new_book_btn.addEventListener("click", () => {
 
 close_dialog_btn.addEventListener("click", () => {
   add_book_dialog.close();
+});
+
+// form logic
+const form = add_book_dialog.querySelector("form");
+form.addEventListener("submit", (event) => {
+  // get form data and parse
+  let form_data = new FormData(form);
+  let data_obj = {};
+  data_obj["title"] = form_data.get("title");
+  data_obj["author"] = form_data.get("author");
+  data_obj["pages"] = Number(form_data.get("page-count"));
+  data_obj["read"] = form_data.get("read-status") === "on";
+
+  // create book data obj and bookView
+  let new_book = new Book(...Object.values(data_obj));
+  addBookToLibrary(myLibrary, new_book);
+  let new_bookView = createBookElement(new_book);
+  library_list.appendChild(new_bookView);
 });
