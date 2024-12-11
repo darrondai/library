@@ -96,15 +96,25 @@ body {
   display: flex;
   flex-direction: column;
   background-color: antiquewhite;
+  gap: 8px;
   padding: 16px;
   border-radius: 16px;
 
   box-shadow: 2px 2px 4px grey;
 }
 
-.book .removeBtn {
-  background-color: lightcoral;
+.book .book-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.book .read-btn {
+  background-color: lightblue;
   margin-top: auto;
+}
+
+.book .remove-btn {
+  background-color: lightcoral;
 }
 
 dialog {

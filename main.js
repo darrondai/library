@@ -4,13 +4,17 @@ function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read || false;
+  this.read = read;
 }
 
 Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${
     this.read ? "read" : "not read yet"
   }`;
+};
+
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
 };
 
 function addBookToLibrary(library, book) {
@@ -21,11 +25,43 @@ function createBookElement(book) {
   // create li element
   let bookView = document.createElement("li");
   bookView.classList.add("book");
-  bookView.textContent = book.info();
+  // bookView.textContent = book.info();
 
-  // add button to li
+  // create div inside for the book info
+  let bookInfo = document.createElement("div");
+  bookInfo.classList.add("book-info");
+  // inside divs make 4 p elements
+  let title = document.createElement("p");
+  title.textContent = "Title: " + book.title;
+  bookInfo.appendChild(title);
+  let author = document.createElement("p");
+  author.textContent = "Author: " + book.author;
+  bookInfo.appendChild(author);
+  let pages = document.createElement("p");
+  pages.textContent = "Pages: " + book.pages;
+  bookInfo.appendChild(pages);
+  let read = document.createElement("p");
+  read.textContent = "Read Status: " + (book.read ? "read" : "not read yet");
+  bookInfo.appendChild(read);
+
+  bookView.appendChild(bookInfo);
+
+  // add read toggle button to li
+  let readBtn = document.createElement("button");
+  readBtn.classList.add("read-btn");
+  readBtn.textContent = "Toggle Read Status";
+  bookView.appendChild(readBtn);
+  // add event listener to read-btn
+  readBtn.addEventListener("click", (e) => {
+    book.toggleRead();
+    console.log(book.read);
+    // NEED TO UPDATE THE VIEW SOMEHOW
+    read.textContent = "Read Status: " + (book.read ? "read" : "not read yet");
+  });
+
+  // add remove book button to li
   let removeBtn = document.createElement("button");
-  removeBtn.classList.add("removeBtn");
+  removeBtn.classList.add("remove-btn");
   removeBtn.textContent = "Remove This Book";
   bookView.appendChild(removeBtn);
   // add event listener for remove button
