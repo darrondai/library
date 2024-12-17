@@ -1,21 +1,23 @@
 const myLibrary = [];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${
+      this.read ? "read" : "not read yet"
+    }`;
+  }
+
+  toggleRead() {
+    this.read = !this.read;
+  }
 }
-
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${
-    this.read ? "read" : "not read yet"
-  }`;
-};
-
-Book.prototype.toggleRead = function () {
-  this.read = !this.read;
-};
 
 function addBookToLibrary(library, book) {
   library.push(book);
@@ -123,14 +125,10 @@ const form = add_book_dialog.querySelector("form");
 form.addEventListener("submit", (event) => {
   // get form data and parse
   let form_data = new FormData(form);
-  let data_obj = {};
-  data_obj["title"] = form_data.get("title");
-  data_obj["author"] = form_data.get("author");
-  data_obj["pages"] = Number(form_data.get("page-count"));
-  data_obj["read"] = form_data.get("read-status") === "on";
 
-  // create book data obj and bookView
-  let new_book = new Book(...Object.values(data_obj));
+  // create book and bookView from form data
+  let new_book = new Book(...Object.fromEntries(form_data.entries()));
+  new_book.read = form_data.has("read-status");
   addBookToLibrary(myLibrary, new_book);
   let new_bookView = createBookElement(new_book);
   library_list.appendChild(new_bookView);
